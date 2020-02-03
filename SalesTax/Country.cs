@@ -20,29 +20,28 @@ namespace SalesTax
         public string Symbol { get; set; }
         public string Name { get; set; }
     }
+
     public class TaxBand
     {
-        public TaxType Type { get; set; }
-        public List<TaxItemPercentage> TaxItems { get; set; }
-    }
+        public string Name { get; set; }
+        public TaxType TaxType { get; set; }
 
-    public class TaxItemPercentage
-    {
-        public ItemType Type { get; set; }
+        public ProductType ItemType { get; set; }
         public decimal Percentage { get; set; }
     }
-
+    
     public enum TaxType
     {
         BasicSalesTax,
         ImportSalesTax,
         FederalSalesTax,
     }
-    public enum ItemType
+    
+    public enum ProductType
     {
+        Default,
         Book,
         Food,
-        MedicalProduct,
-        Other,
+        MedicalProduct
     }
 }

@@ -1,24 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 
 namespace SalesTax
 {
-    public class BasicTaxSpecification : ISpecification<Product>
+    public class BasicTaxSpecification : ISpecification<Product>, ITaxableType
     {
         readonly Country _country;
+
+        public TaxType TaxType { get; }
 
         public BasicTaxSpecification(Country country)
         {
             _country = country;
+            TaxType = TaxType.BasicSalesTax;
         }
-
+        
         public bool IsSatisfied(Product item)
         {
-            return _country.TaxBands.Where(x => x.Type == TaxType.BasicSalesTax)
-                           .Any(x => x.TaxItems.Any(y => y.Type == item.Type));
+            return _country.TaxBands.Any(x => x.TaxType == TaxType && x.ItemType == item.ProductType);
         }
     }
 }

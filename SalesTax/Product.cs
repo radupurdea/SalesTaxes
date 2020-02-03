@@ -1,42 +1,34 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace SalesTax
 {
-    public class Product
+    public class Product 
     {
-        public ItemType Type { get; set; }
-        public decimal Price { get; set; }
+        public string Name { get; set; }
+        public ProductType ProductType { get; set; }
+        public decimal UnitPrice { get; set; }
         public string CountryOfDelivery { get; set; }
     }
 
-    public class OrderProduct : ITaxable
+    public class OrderProduct
     {
+        public OrderProduct()
+        {
+            ApplicableTaxes = new List<ProductTax>();
+        }
         public int Quantity { get; set; }
         public Product Product { get; set; }
-        
-        public decimal TaxPercentage { get; set; }
 
-        public Tax CalculateTax()
-        {
-            return new Tax(Product.Price * TaxPercentage / 100);
-        }
+        public List<ProductTax> ApplicableTaxes { get; set; }
+
+        public decimal ExtendedAmount { get; set; }
+        public decimal TotalAmount { get; set; }
     }
 
-    public interface ITaxable
+    public class ProductTax
     {
-        decimal TaxPercentage { get; set; }
-        Tax CalculateTax();
-    }
-
-    public class Tax
-    {
-        public Tax(decimal amount)
-        {
-            Amount = amount;
-        }
-
-        public string Name { get; }
-        public TaxType Type { get; }
-        public decimal Amount { get; } 
+        public TaxBand TaxBand { get; set; }
+        public decimal TaxAmount { get; set; }
     }
 }
