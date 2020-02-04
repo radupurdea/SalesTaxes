@@ -16,7 +16,7 @@ namespace SalesTax
         
         public bool IsSatisfied(Product item)
         {
-            return _country.TaxBands.Any(x => x.TaxType == TaxType && x.ItemType == item.ProductType);
+            return _country.TaxBands.Any(x => x.TaxType == TaxType && x.ProductType == item.ProductType);
         }
     }
 }

@@ -13,7 +13,16 @@ namespace SalesTax
             
         }
 
-        public OrderProduct AddProduct()
+        public OrderProduct AddToCart(Product selectedProduct)
+        {
+            return new OrderProduct()
+            {
+                Product = selectedProduct,
+                Quantity = 1
+            };
+        }
+
+        public List<OrderProduct> Checkout(List<Product> selectedProducts)
         {
             //step 0
             //create orderProduct
@@ -28,7 +37,7 @@ namespace SalesTax
 
             //step 3
             //return order product
-            return new OrderProduct();
+            return new List<OrderProduct>();
         }
     }
 }

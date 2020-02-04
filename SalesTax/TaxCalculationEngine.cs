@@ -28,14 +28,14 @@ namespace SalesTax
 
         private void CalculateTax(OrderProduct orderProduct, ITaxableType taxType)
         {
-            List<TaxBand> bands = _country.TaxBands.Where(x => x.TaxType == taxType.TaxType && x.ItemType == orderProduct.Product.ProductType).ToList(); 
+            List<TaxBand> bands = _country.TaxBands.Where(x => x.TaxType == taxType.TaxType && x.ProductType == orderProduct.Product.ProductType).ToList(); 
 
             foreach (TaxBand taxBand in bands)
             {
                 orderProduct.ApplicableTaxes.Add(new ProductTax()
                 {
                     TaxBand = taxBand,
-                    TaxAmount = Math.Round(orderProduct.ExtendedAmount * taxBand.Percentage / 100, 2,MidpointRounding.AwayFromZero)
+                    TaxAmount = Math.Round(orderProduct.ExtendedAmount * taxBand.Percentage / 100, 2, MidpointRounding.AwayFromZero)
                 });
             }
         }

@@ -21,11 +21,11 @@ namespace SalesTax
                 },
                 TaxBands = new List<TaxBand>()
                 {
-                    new TaxBand() { TaxType = TaxType.BasicSalesTax, Name = "Sales Tax", ItemType = ProductType.Book, Percentage = 0M },
-                    new TaxBand() { TaxType = TaxType.BasicSalesTax, Name = "Sales Tax", ItemType = ProductType.Food, Percentage = 0M },
-                    new TaxBand() { TaxType = TaxType.BasicSalesTax, Name = "Sales Tax", ItemType = ProductType.MedicalProduct, Percentage = 0M },
-                    new TaxBand() { TaxType = TaxType.BasicSalesTax, Name = "Sales Tax", ItemType = ProductType.Default, Percentage = 10M },
-                    new TaxBand() { TaxType = TaxType.ImportSalesTax, Name = "Import Sales Tax", ItemType = ProductType.Default, Percentage = 5M },
+                    new TaxBand() { TaxType = TaxType.BasicSalesTax, Name = "Sales Tax", ProductType = ProductType.Book, Percentage = 0M },
+                    new TaxBand() { TaxType = TaxType.BasicSalesTax, Name = "Sales Tax", ProductType = ProductType.Food, Percentage = 0M },
+                    new TaxBand() { TaxType = TaxType.BasicSalesTax, Name = "Sales Tax", ProductType = ProductType.MedicalProduct, Percentage = 0M },
+                    new TaxBand() { TaxType = TaxType.BasicSalesTax, Name = "Sales Tax", ProductType = ProductType.Default, Percentage = 10M },
+                    new TaxBand() { TaxType = TaxType.ImportSalesTax, Name = "Import Sales Tax", ProductType = ProductType.Default, Percentage = 5M },
                 }
             };
 

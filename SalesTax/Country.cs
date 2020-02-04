@@ -26,7 +26,7 @@ namespace SalesTax
         public string Name { get; set; }
         public TaxType TaxType { get; set; }
 
-        public ProductType ItemType { get; set; }
+        public ProductType ProductType { get; set; }
         public decimal Percentage { get; set; }
     }
     

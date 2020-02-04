@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TEK.Store.Console", "TEK.Store.Console\TEK.Store.Console.csproj", "{00ED0090-1E3F-44EA-A89E-09AE5B07E166}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TEK.Infrastructure.Interfaces", "TEK.Infrastructure.Interfaces\TEK.Infrastructure.Interfaces.csproj", "{BEB2DE5F-77CD-4922-A554-AD8EEEF18D7E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TEK.Order.DataAccess", "TEK.Order.DataAccess\TEK.Order.DataAccess.csproj", "{D058D5F2-32FE-4B9B-A5D4-BA5FCCE73B03}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TEK.TaxCalculation.Engine", "TEK.TaxCalculation.Engine\TEK.TaxCalculation.Engine.csproj", "{84C0B7A1-DDBF-4606-A9A6-1D53C3F2582B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TEK.Purchase.Manager", "TEK.Purchase.Manager\TEK.Purchase.Manager.csproj", "{31697A63-ADBF-468B-9DD1-EE632FC9F400}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{00ED0090-1E3F-44EA-A89E-09AE5B07E166}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00ED0090-1E3F-44EA-A89E-09AE5B07E166}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00ED0090-1E3F-44EA-A89E-09AE5B07E166}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00ED0090-1E3F-44EA-A89E-09AE5B07E166}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BEB2DE5F-77CD-4922-A554-AD8EEEF18D7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BEB2DE5F-77CD-4922-A554-AD8EEEF18D7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BEB2DE5F-77CD-4922-A554-AD8EEEF18D7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BEB2DE5F-77CD-4922-A554-AD8EEEF18D7E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D058D5F2-32FE-4B9B-A5D4-BA5FCCE73B03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D058D5F2-32FE-4B9B-A5D4-BA5FCCE73B03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D058D5F2-32FE-4B9B-A5D4-BA5FCCE73B03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D058D5F2-32FE-4B9B-A5D4-BA5FCCE73B03}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84C0B7A1-DDBF-4606-A9A6-1D53C3F2582B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84C0B7A1-DDBF-4606-A9A6-1D53C3F2582B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84C0B7A1-DDBF-4606-A9A6-1D53C3F2582B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84C0B7A1-DDBF-4606-A9A6-1D53C3F2582B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31697A63-ADBF-468B-9DD1-EE632FC9F400}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31697A63-ADBF-468B-9DD1-EE632FC9F400}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31697A63-ADBF-468B-9DD1-EE632FC9F400}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31697A63-ADBF-468B-9DD1-EE632FC9F400}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {23FF9D74-AE34-41C9-A887-C7B64D91FDA4}
+	EndGlobalSection
+EndGlobal
