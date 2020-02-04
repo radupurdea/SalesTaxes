@@ -21,12 +21,19 @@ namespace TEK.Purchase.Manager
 
         public void AddToCart(Product selectedProduct)
         {
-            Cart.Add(new OrderProduct()
+            if(Cart.Any(x => x.Product == selectedProduct))
             {
-                Product = selectedProduct,
-                Quantity = Cart.Where(x => x.Product == selectedProduct).Count() + 1
-            });
-
+                Cart.First(x => x.Product == selectedProduct).Quantity++;
+            }
+            else
+            {
+                Cart.Add(new OrderProduct()
+                {
+                    Product = selectedProduct,
+                    Quantity = 1
+                });
+            }
+            
             Cart.ForEach(orderProduct => orderProduct.ExtendedAmount = orderProduct.Quantity * orderProduct.Product.UnitPrice);
 
             Cart.ForEach(orderProduct => orderProduct.TotalAmount = orderProduct.ExtendedAmount);
@@ -83,6 +90,7 @@ namespace TEK.Purchase.Manager
             {
                 Quantity = orderProduct.Quantity,
                 Name = $"{(orderProduct.Product.CountryOfDelivery != storeCountry.Name ? "imported " : string.Empty)}{orderProduct.Product.Name}",
+                UnitPrice = orderProduct.Product.UnitPrice,
                 Total = orderProduct.TotalAmount
             }));
         }

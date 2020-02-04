@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TEK.TaxCalculation.Engine",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TEK.Purchase.Manager", "TEK.Purchase.Manager\TEK.Purchase.Manager.csproj", "{31697A63-ADBF-468B-9DD1-EE632FC9F400}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{5A59F375-AE55-42C6-A2AC-7D469A3BE625}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TEK.Order.DataAccess.Tests", "TEK.Order.DataAccess.Tests\TEK.Order.DataAccess.Tests.csproj", "{9A7720B1-2FA8-46A8-9B38-E10C25D319AD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,9 +43,16 @@ Global
 		{31697A63-ADBF-468B-9DD1-EE632FC9F400}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{31697A63-ADBF-468B-9DD1-EE632FC9F400}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{31697A63-ADBF-468B-9DD1-EE632FC9F400}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A7720B1-2FA8-46A8-9B38-E10C25D319AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A7720B1-2FA8-46A8-9B38-E10C25D319AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A7720B1-2FA8-46A8-9B38-E10C25D319AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A7720B1-2FA8-46A8-9B38-E10C25D319AD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9A7720B1-2FA8-46A8-9B38-E10C25D319AD} = {5A59F375-AE55-42C6-A2AC-7D469A3BE625}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {23FF9D74-AE34-41C9-A887-C7B64D91FDA4}

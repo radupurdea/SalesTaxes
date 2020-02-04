@@ -35,7 +35,7 @@ namespace TEK.TaxCalculation.Engine
                                               .ToList();
             if (!bands.Any())
                 bands = storeCountry.TaxBands
-                                    .Where(x => x.TaxType == taxType.TaxType)
+                                    .Where(x => x.TaxType == taxType.TaxType && x.ProductType == Infrastructure.Interfaces.Enum.ProductType.Default)
                                     .ToList();
 
             foreach (TaxBand taxBand in bands)

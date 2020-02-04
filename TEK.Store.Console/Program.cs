@@ -76,13 +76,13 @@ namespace TEK.Store.Console
 
         private static void PrintPreviewReceipt(Receipt receipt)
         {
-            receipt.LineItems.ForEach(lineItem => System.Console.WriteLine($"{lineItem.Quantity} {lineItem.Name} at {lineItem.Total}"));
+            receipt.LineItems.ForEach(lineItem => System.Console.WriteLine($"{lineItem.Quantity} {lineItem.Name} at {lineItem.UnitPrice:0.00}"));
         }
 
         private static void PrintReceipt(Receipt receipt)
         {
-            receipt.LineItems.ForEach(lineItem => System.Console.WriteLine($"{lineItem.Quantity} {lineItem.Name}: {lineItem.Total}"));
-            System.Console.WriteLine($"Sales Taxes: {receipt.TotalTax} Total: {receipt.Total}");
+            receipt.LineItems.ForEach(lineItem => System.Console.WriteLine($"{lineItem.Quantity} {lineItem.Name}: {lineItem.Total:0.00}"));
+            System.Console.WriteLine($"Sales Taxes: {receipt.TotalTax:0.00} Total: {receipt.Total:0.00}");
         }
     }
 }
