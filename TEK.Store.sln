@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.1000
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TEK.Store.Console", "TEK.Store.Console\TEK.Store.Console.csproj", "{00ED0090-1E3F-44EA-A89E-09AE5B07E166}"
 EndProject
@@ -15,7 +15,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TEK.Purchase.Manager", "TEK
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{5A59F375-AE55-42C6-A2AC-7D469A3BE625}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TEK.Order.DataAccess.Tests", "TEK.Order.DataAccess.Tests\TEK.Order.DataAccess.Tests.csproj", "{9A7720B1-2FA8-46A8-9B38-E10C25D319AD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TEK.Purchase.Manager.Tests", "Tests\TEK.Purchase.Manager.Tests\TEK.Purchase.Manager.Tests.csproj", "{16BDB142-1BD5-444A-8FCB-D662BA8E1BEC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TEK.Order.DataAccess.Tests", "Tests\TEK.Order.DataAccess.Tests\TEK.Order.DataAccess.Tests.csproj", "{6E54C9C4-F5F3-4B39-9E0D-D521C71CE828}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TEK.TaxCalculation.Engine.Tests", "Tests\TEK.TaxCalculation.Engine.Tests\TEK.TaxCalculation.Engine.Tests.csproj", "{B08156A8-6803-4663-A981-F76ED748B9DB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,16 +47,26 @@ Global
 		{31697A63-ADBF-468B-9DD1-EE632FC9F400}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{31697A63-ADBF-468B-9DD1-EE632FC9F400}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{31697A63-ADBF-468B-9DD1-EE632FC9F400}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9A7720B1-2FA8-46A8-9B38-E10C25D319AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9A7720B1-2FA8-46A8-9B38-E10C25D319AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9A7720B1-2FA8-46A8-9B38-E10C25D319AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9A7720B1-2FA8-46A8-9B38-E10C25D319AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{16BDB142-1BD5-444A-8FCB-D662BA8E1BEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16BDB142-1BD5-444A-8FCB-D662BA8E1BEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16BDB142-1BD5-444A-8FCB-D662BA8E1BEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16BDB142-1BD5-444A-8FCB-D662BA8E1BEC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E54C9C4-F5F3-4B39-9E0D-D521C71CE828}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E54C9C4-F5F3-4B39-9E0D-D521C71CE828}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E54C9C4-F5F3-4B39-9E0D-D521C71CE828}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E54C9C4-F5F3-4B39-9E0D-D521C71CE828}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B08156A8-6803-4663-A981-F76ED748B9DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B08156A8-6803-4663-A981-F76ED748B9DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B08156A8-6803-4663-A981-F76ED748B9DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B08156A8-6803-4663-A981-F76ED748B9DB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{9A7720B1-2FA8-46A8-9B38-E10C25D319AD} = {5A59F375-AE55-42C6-A2AC-7D469A3BE625}
+		{16BDB142-1BD5-444A-8FCB-D662BA8E1BEC} = {5A59F375-AE55-42C6-A2AC-7D469A3BE625}
+		{6E54C9C4-F5F3-4B39-9E0D-D521C71CE828} = {5A59F375-AE55-42C6-A2AC-7D469A3BE625}
+		{B08156A8-6803-4663-A981-F76ED748B9DB} = {5A59F375-AE55-42C6-A2AC-7D469A3BE625}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {23FF9D74-AE34-41C9-A887-C7B64D91FDA4}
