@@ -1,7 +1,8 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TEK.Infrastructure.Interfaces;
 using TEK.Infrastructure.Interfaces.DataContract;
+using System.Collections.Generic;
+using TEK.Infrastructure.Interfaces.Enum;
 
 namespace TEK.Order.DataAccess.Tests
 {
@@ -9,20 +10,39 @@ namespace TEK.Order.DataAccess.Tests
     public class CountryDefinitionServiceTest
     {
         [TestMethod]
-        public void GetCountry379()
+        public void GetCountry_DefaultStore_ShouldReturnCanada()
         {
-            Country country;
-            ICountryDefinitionService s0 = new CountryDefinitionService();
-            country = s0.GetCountry();
-            Assert.IsNotNull((object)country);
-            Assert.AreEqual<string>("Canada", country.Name);
-            Assert.IsNotNull(country.Currency);
-            Assert.AreEqual<string>("$", country.Currency.Symbol);
-            Assert.AreEqual<string>("CAD", country.Currency.Name);
-            Assert.IsNotNull(country.TaxBands);
-            Assert.AreEqual<int>(8, country.TaxBands.Capacity);
-            Assert.AreEqual<int>(5, country.TaxBands.Count);
-            Assert.IsNotNull((object)s0);
+            Country expectedCountry = new Country()
+            {
+                Name = "Canada",
+                Currency = new Currency()
+                {
+                    Name = "CAD",
+                    Symbol = "$"
+                },
+                TaxBands = new List<TaxBand>()
+                {
+                    new TaxBand() { TaxType = TaxType.BasicSalesTax, Name = "Sales Tax", ProductType = ProductType.Book, Percentage = 0M },
+                    new TaxBand() { TaxType = TaxType.BasicSalesTax, Name = "Sales Tax", ProductType = ProductType.Food, Percentage = 0M },
+                    new TaxBand() { TaxType = TaxType.BasicSalesTax, Name = "Sales Tax", ProductType = ProductType.MedicalProduct, Percentage = 0M },
+                    new TaxBand() { TaxType = TaxType.BasicSalesTax, Name = "Sales Tax", ProductType = ProductType.Default, Percentage = 10M },
+                    new TaxBand() { TaxType = TaxType.ImportSalesTax, Name = "Import Sales Tax", ProductType = ProductType.Default, Percentage = 5M },
+                }
+            };
+
+            ICountryDefinitionService countryDefinitionService = new CountryDefinitionService();
+
+            Country actualCountry = countryDefinitionService.GetCountry();
+
+            Assert.IsNotNull(actualCountry);
+            Assert.AreEqual(expectedCountry.Name, actualCountry.Name);
+            Assert.IsNotNull(actualCountry.Currency);
+            Assert.AreEqual(expectedCountry.Currency.Symbol, actualCountry.Currency.Symbol);
+            Assert.AreEqual(expectedCountry.Currency.Name, actualCountry.Currency.Name);
+            Assert.IsNotNull(actualCountry.TaxBands);
+            Assert.AreEqual(8, actualCountry.TaxBands.Capacity);
+            Assert.AreEqual(5, actualCountry.TaxBands.Count);
+            Assert.IsNotNull(countryDefinitionService);
         }
     }
 }

@@ -1,6 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using TEK.Infrastructure.Interfaces.DataContract;
+using TEK.Infrastructure.Interfaces;
 
 namespace TEK.Order.DataAccess.Tests
 {
@@ -8,15 +9,16 @@ namespace TEK.Order.DataAccess.Tests
     public class StoreDefinitionServiceTest
     {
         [TestMethod]
-        public void GetStoreProducts950()
+        public void GetStoreProducts_DefaultStore_ShouldReturnNineProducts()
         {
-            //List<Product> list;
-            //StoreDefinitionService s0 = new StoreDefinitionService();
-            //list = this.GetStoreProducts(s0);
-            //Assert.IsNotNull((object)list);
-            //Assert.AreEqual<int>(16, list.Capacity);
-            //Assert.AreEqual<int>(9, list.Count);
-            //Assert.IsNotNull((object)s0);
+            IStoreDefinitionService storeDefinitionService = new StoreDefinitionService();
+
+            List<Product> storeProducts = storeDefinitionService.GetStoreProducts();
+
+            Assert.IsNotNull(storeProducts);
+            Assert.AreEqual(16, storeProducts.Capacity);
+            Assert.AreEqual(9, storeProducts.Count);
+            Assert.IsNotNull(storeDefinitionService);
         }
     }
 }

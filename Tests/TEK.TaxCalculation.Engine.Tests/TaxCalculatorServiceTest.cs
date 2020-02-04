@@ -1,133 +1,82 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
+using System.Collections.Generic;
+using TEK.Infrastructure.Interfaces;
+using TEK.Infrastructure.Interfaces.DataContract;
+using System.Linq;
 
 namespace TEK.TaxCalculation.Engine.Tests
 {
     [TestClass]
     public class TaxCalculatorServiceTest
     {
-        //[TestMethod]
-        //[RaisedException(typeof(NullReferenceException))]
-        //public void ApplyTaxThrowsNullReferenceException910()
-        //{
-        //    TaxCalculatorService taxCalculatorService;
-        //    taxCalculatorService =
-        //      new TaxCalculatorService((ICountryDefinitionService)null,
-        //                               (IEnumerable<ISpecification<Product>>)null);
-        //    this.ApplyTax(taxCalculatorService, (OrderProduct)null);
-        //}
+        protected ITaxCalculatorService _taxCalculatorService;
+        protected Mock<ICountryDefinitionService> _mockCountryDefinitionService;
+        protected Mock<IEnumerable<ISpecification<Product>>> _mockSpecifications;
+        protected Mock<ISpecification<Product>> _mockTaxSpecification;
+        protected Mock<ITaxableType> _mockTaxableType;
 
-        //[TestMethod]
-        //public void ApplyTax98()
-        //{
-        //    TaxCalculatorService taxCalculatorService;
-        //    ISpecification<Product>[] iSpecifications = new ISpecification<Product>[0];
-        //    taxCalculatorService =
-        //      new TaxCalculatorService((ICountryDefinitionService)null,
-        //                               (IEnumerable<ISpecification<Product>>)iSpecifications);
-        //    this.ApplyTax(taxCalculatorService, (OrderProduct)null);
-        //    Assert.IsNotNull((object)taxCalculatorService);
-        //}
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            _mockTaxableType = new Mock<ITaxableType>(MockBehavior.Strict);
+            _mockTaxSpecification = new Mock<ISpecification<Product>>(MockBehavior.Strict);
+            _mockTaxSpecification.As<ITaxableType>();
+            _mockCountryDefinitionService = new Mock<ICountryDefinitionService>(MockBehavior.Strict);
+            _mockSpecifications = new Mock<IEnumerable<ISpecification<Product>>>(MockBehavior.Strict);
+            _mockSpecifications.Setup(c => c.GetEnumerator()).Returns(new List<ISpecification<Product>> { _mockTaxSpecification.Object }.Select(x => x).GetEnumerator());
 
-        //[TestMethod]
-        //[RaisedException(typeof(NullReferenceException))]
-        //public void ApplyTaxThrowsNullReferenceException650()
-        //{
-        //    TaxCalculatorService taxCalculatorService;
-        //    ISpecification<Product>[] iSpecifications = new ISpecification<Product>[1];
-        //    taxCalculatorService =
-        //      new TaxCalculatorService((ICountryDefinitionService)null,
-        //                               (IEnumerable<ISpecification<Product>>)iSpecifications);
-        //    this.ApplyTax(taxCalculatorService, (OrderProduct)null);
-        //}
+            _taxCalculatorService = new TaxCalculatorService(_mockCountryDefinitionService.Object, _mockSpecifications.Object);
+        }
 
-        //[TestMethod]
-        //[RaisedException(typeof(NullReferenceException))]
-        //public void ApplyTaxThrowsNullReferenceException784()
-        //{
-        //    TaxCalculatorService taxCalculatorService;
-        //    OrderProduct orderProduct;
-        //    ISpecification<Product>[] iSpecifications = new ISpecification<Product>[1];
-        //    taxCalculatorService =
-        //      new TaxCalculatorService((ICountryDefinitionService)null,
-        //                               (IEnumerable<ISpecification<Product>>)iSpecifications);
-        //    orderProduct = new OrderProduct();
-        //    orderProduct.Quantity = 0;
-        //    orderProduct.Product = (Product)null;
-        //    orderProduct.ExtendedAmount = default(decimal);
-        //    orderProduct.TotalAmount = default(decimal);
-        //    this.ApplyTax(taxCalculatorService, orderProduct);
-        //}
+        [TestCleanup]
+        public void TestCleanup()
+        {
+            _mockTaxableType.VerifyAll();
+            _mockTaxSpecification.VerifyAll();
+            _mockCountryDefinitionService.VerifyAll();
+            _mockSpecifications.VerifyAll();
+        }
 
-        //[TestMethod]
-        //[RaisedException(typeof(NullReferenceException))]
-        //public void ApplyTaxThrowsNullReferenceException412()
-        //{
-        //    BasicTaxSpecification basicTaxSpecification;
-        //    TaxCalculatorService taxCalculatorService;
-        //    OrderProduct orderProduct;
-        //    basicTaxSpecification =
-        //      new BasicTaxSpecification((ICountryDefinitionService)null);
-        //    ISpecification<Product>[] iSpecifications = new ISpecification<Product>[1];
-        //    iSpecifications[0] = (ISpecification<Product>)basicTaxSpecification;
-        //    taxCalculatorService =
-        //      new TaxCalculatorService((ICountryDefinitionService)null,
-        //                               (IEnumerable<ISpecification<Product>>)iSpecifications);
-        //    orderProduct = new OrderProduct();
-        //    orderProduct.Quantity = 0;
-        //    orderProduct.Product = (Product)null;
-        //    orderProduct.ExtendedAmount = default(decimal);
-        //    orderProduct.TotalAmount = default(decimal);
-        //    this.ApplyTax(taxCalculatorService, orderProduct);
-        //}
+        [TestMethod]
+        public void ApplyTax_BasicTax_ShouldCalculateTax()
+        {
+            _mockTaxSpecification.Setup(f => f.IsSatisfied(It.IsAny<Product>())).Returns(true);
 
-        //[TestMethod]
-        //[RaisedException(typeof(NullReferenceException))]
-        //public void ApplyTaxThrowsNullReferenceException225()
-        //{
-        //    ImportTaxSpecification importTaxSpecification;
-        //    TaxCalculatorService taxCalculatorService;
-        //    OrderProduct orderProduct;
-        //    importTaxSpecification =
-        //      new ImportTaxSpecification((ICountryDefinitionService)null);
-        //    ISpecification<Product>[] iSpecifications = new ISpecification<Product>[1];
-        //    iSpecifications[0] = (ISpecification<Product>)importTaxSpecification;
-        //    taxCalculatorService =
-        //      new TaxCalculatorService((ICountryDefinitionService)null,
-        //                               (IEnumerable<ISpecification<Product>>)iSpecifications);
-        //    orderProduct = new OrderProduct();
-        //    orderProduct.Quantity = 0;
-        //    orderProduct.Product = (Product)null;
-        //    orderProduct.ExtendedAmount = default(decimal);
-        //    orderProduct.TotalAmount = default(decimal);
-        //    this.ApplyTax(taxCalculatorService, orderProduct);
-        //}
+            _mockCountryDefinitionService.Setup(f => f.GetCountry()).Returns(new Country()
+            {
+                Name = "Canada",
+                TaxBands = new List<TaxBand>()
+                {
+                     new TaxBand()
+                     {
+                          Percentage = 10M,
+                          ProductType = Infrastructure.Interfaces.Enum.ProductType.Default,
+                          TaxType = Infrastructure.Interfaces.Enum.TaxType.BasicSalesTax
+                     }
+                }
+            });
 
-        //[TestMethod]
-        //[RaisedException(typeof(NullReferenceException))]
-        //public void ApplyTaxThrowsNullReferenceException186()
-        //{
-        //    ImportTaxSpecification importTaxSpecification;
-        //    TaxCalculatorService taxCalculatorService;
-        //    OrderProduct orderProduct;
-        //    importTaxSpecification =
-        //      new ImportTaxSpecification((ICountryDefinitionService)null);
-        //    ISpecification<Product>[] iSpecifications = new ISpecification<Product>[1];
-        //    iSpecifications[0] = (ISpecification<Product>)importTaxSpecification;
-        //    taxCalculatorService =
-        //      new TaxCalculatorService((ICountryDefinitionService)null,
-        //                               (IEnumerable<ISpecification<Product>>)iSpecifications);
-        //    Product s0 = new Product();
-        //    s0.Name = (string)null;
-        //    s0.ProductType = ProductType.Default;
-        //    s0.UnitPrice = default(decimal);
-        //    s0.CountryOfDelivery = (string)null;
-        //    orderProduct = new OrderProduct();
-        //    orderProduct.Quantity = 0;
-        //    orderProduct.Product = s0;
-        //    orderProduct.ExtendedAmount = default(decimal);
-        //    orderProduct.TotalAmount = default(decimal);
-        //    this.ApplyTax(taxCalculatorService, orderProduct);
-        //}
+            _mockTaxSpecification.As<ITaxableType>().SetupGet(x => x.TaxType).Returns(Infrastructure.Interfaces.Enum.TaxType.BasicSalesTax);
+
+            OrderProduct orderProduct = new OrderProduct()
+            {
+                Product = new Product()
+                {
+                    CountryOfDelivery = "Canada",
+                    Name = "lollipop",
+                    ProductType = Infrastructure.Interfaces.Enum.ProductType.Default,
+                    UnitPrice = 10.45M
+                },
+                 Quantity = 1,
+                 ExtendedAmount = 10.45M
+            };
+
+            _taxCalculatorService.ApplyTax(orderProduct);
+
+            Assert.AreEqual(1, orderProduct.ApplicableTaxes.Count);
+            Assert.AreEqual(1.05M, orderProduct.ApplicableTaxes[0].TaxAmount);
+        }
     }
 }

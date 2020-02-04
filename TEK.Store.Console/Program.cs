@@ -35,8 +35,8 @@ namespace TEK.Store.Console
             #region Input/Output 2
             List<Product> selectedProductsForOutput2 = storeProducts.Where(x =>
                 (x.Name == "box of chocolates" && x.UnitPrice == 10M)
-                || (x.Name == "bottle of perfume" && x.UnitPrice == 47.50M)
-            ).ToList();
+                || (x.Name == "bottle of perfume" && x.UnitPrice == 47.50M))
+                .ToList();
             
             CheckoutScenario(cartService, selectedProductsForOutput2);
             #endregion
@@ -46,8 +46,8 @@ namespace TEK.Store.Console
                 (x.Name == "bottle of perfume" && x.UnitPrice == 27.99M)
                 || (x.Name == "bottle of perfume" && x.UnitPrice == 18.99M)
                 || (x.Name == "packet of headache pills")
-                || (x.Name == "box of chocolates" && x.UnitPrice == 11.25M)
-            ).ToList();
+                || (x.Name == "box of chocolates" && x.UnitPrice == 11.25M))
+                .ToList();
             
             CheckoutScenario(cartService, selectedProductsForOutput3);
             #endregion

@@ -21,6 +21,9 @@ namespace TEK.Purchase.Manager
 
         public void AddToCart(Product selectedProduct)
         {
+            if (selectedProduct == null)
+                return;
+
             if(Cart.Any(x => x.Product == selectedProduct))
             {
                 Cart.First(x => x.Product == selectedProduct).Quantity++;
