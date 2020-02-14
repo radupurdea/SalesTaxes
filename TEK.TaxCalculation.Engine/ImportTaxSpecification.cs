@@ -8,9 +8,9 @@ namespace TEK.TaxCalculation.Engine
     {
         public TaxType TaxType { get; }
 
-        readonly ICountryDefinitionService _countryDefinitionService;
+        readonly ICountryDefinitionDataAccess _countryDefinitionService;
 
-        public ImportTaxSpecification(ICountryDefinitionService countryDefinitionService)
+        public ImportTaxSpecification(ICountryDefinitionDataAccess countryDefinitionService)
         {
             _countryDefinitionService = countryDefinitionService;
             TaxType = TaxType.ImportSalesTax;

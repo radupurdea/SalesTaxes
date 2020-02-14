@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using TEK.Infrastructure.Interfaces;
 using TEK.Infrastructure.Interfaces.DataContract;
@@ -7,16 +8,15 @@ namespace TEK.Purchase.Manager
 {
     public class CartService : ICartService
     {
-        public List<OrderProduct> Cart { get; private set; }
+        readonly ITaxCalculatorService _taxCalculatorDataAccess;
+        readonly ICountryDefinitionDataAccess _countryDefinitionDataAccess;
+        readonly ICartItemDataAccess _cartItemDataAccess;
 
-        readonly ITaxCalculatorService _taxCalculatorService;
-        readonly ICountryDefinitionService _countryDefinitionService;
-
-        public CartService(ITaxCalculatorService taxCalculatorService, ICountryDefinitionService countryDefinitionService)
+        public CartService(ITaxCalculatorService taxCalculatorDataAccess, ICountryDefinitionDataAccess countryDefinitionDataAccess, ICartItemDataAccess cartItemDataAccess)
         {
-            Cart = new List<OrderProduct>();
-            _taxCalculatorService = taxCalculatorService;
-            _countryDefinitionService = countryDefinitionService;
+            _taxCalculatorDataAccess = taxCalculatorDataAccess;
+            _countryDefinitionDataAccess = countryDefinitionDataAccess;
+            _cartItemDataAccess = cartItemDataAccess;
         }
 
         public void AddToCart(Product selectedProduct)
@@ -24,53 +24,63 @@ namespace TEK.Purchase.Manager
             if (selectedProduct == null)
                 return;
 
-            if(Cart.Any(x => x.Product == selectedProduct))
+            var cart = _cartItemDataAccess.GetCart();
+
+            if(cart.Any(x => x.Product == selectedProduct))
             {
-                Cart.First(x => x.Product == selectedProduct).Quantity++;
+                cart.First(x => x.Product == selectedProduct).Quantity++;
             }
             else
             {
-                Cart.Add(new OrderProduct()
+                cart.Add(new OrderProduct()
                 {
                     Product = selectedProduct,
                     Quantity = 1
                 });
             }
-            
-            Cart.ForEach(orderProduct => orderProduct.ExtendedAmount = orderProduct.Quantity * orderProduct.Product.UnitPrice);
 
-            Cart.ForEach(orderProduct => orderProduct.TotalAmount = orderProduct.ExtendedAmount);
+            cart.ForEach(orderProduct => orderProduct.ExtendedAmount = orderProduct.Quantity * orderProduct.Product.UnitPrice);
+
+            cart.ForEach(orderProduct => orderProduct.TotalAmount = orderProduct.ExtendedAmount);
+
+            _cartItemDataAccess.SaveCart(cart);
         }
 
         public Receipt PreviewCart()
         {
             Receipt receipt = new Receipt();
-            AddLineItems(receipt);
+            var cart = _cartItemDataAccess.GetCart();
+
+            AddLineItems(receipt, cart);
 
             return receipt;
         }
 
         public Receipt Checkout()
         {
-            Cart.ForEach(orderProduct => _taxCalculatorService.ApplyTax(orderProduct));
+            var cart = _cartItemDataAccess.GetCart();
 
-            Cart.ForEach(orderProduct => orderProduct.TotalAmount += orderProduct.ApplicableTaxes.Sum(t => t.TaxAmount));
+            cart.ForEach(orderProduct => _taxCalculatorDataAccess.ApplyTax(orderProduct));
+
+            cart.ForEach(orderProduct => orderProduct.TotalAmount += orderProduct.ApplicableTaxes.Sum(t => t.TaxAmount));
+
+            _cartItemDataAccess.SaveCart(cart);
 
             Receipt receipt = new Receipt()
             {
-                Total = Cart.Sum(orderProduct => orderProduct.TotalAmount),
-                TotalTax = Cart.Sum(orderProduct => orderProduct.ApplicableTaxes.Sum(t => t.TaxAmount)),
+                Total = cart.Sum(orderProduct => orderProduct.TotalAmount),
+                TotalTax = cart.Sum(orderProduct => orderProduct.ApplicableTaxes.Sum(t => t.TaxAmount)),
             };
             
-            AddLineItems(receipt);
+            AddLineItems(receipt, cart);
             AddTaxItems(receipt);
-
+            
             return receipt;
         }
 
         public void ClearCart()
         {
-            Cart.Clear();
+            _cartItemDataAccess.SaveCart(new List<OrderProduct>());
         }
 
         private static void AddTaxItems(Receipt receipt)
@@ -85,11 +95,11 @@ namespace TEK.Purchase.Manager
             };
         }
 
-        private void AddLineItems(Receipt receipt)
+        private void AddLineItems(Receipt receipt, List<OrderProduct> cart)
         {
-            Country storeCountry = _countryDefinitionService.GetCountry();
+            Country storeCountry = _countryDefinitionDataAccess.GetCountry();
 
-            Cart.ForEach(orderProduct => receipt.LineItems.Add(new LineItem()
+            cart.ForEach(orderProduct => receipt.LineItems.Add(new LineItem()
             {
                 Quantity = orderProduct.Quantity,
                 Name = $"{(orderProduct.Product.CountryOfDelivery != storeCountry.Name ? "imported " : string.Empty)}{orderProduct.Product.Name}",

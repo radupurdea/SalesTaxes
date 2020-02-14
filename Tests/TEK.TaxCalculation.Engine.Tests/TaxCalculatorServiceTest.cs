@@ -12,7 +12,7 @@ namespace TEK.TaxCalculation.Engine.Tests
     public class TaxCalculatorServiceTest
     {
         protected ITaxCalculatorService _taxCalculatorService;
-        protected Mock<ICountryDefinitionService> _mockCountryDefinitionService;
+        protected Mock<ICountryDefinitionDataAccess> _mockCountryDefinitionService;
         protected Mock<IEnumerable<ISpecification<Product>>> _mockSpecifications;
         protected Mock<ISpecification<Product>> _mockTaxSpecification;
         protected Mock<ITaxableType> _mockTaxableType;
@@ -23,7 +23,7 @@ namespace TEK.TaxCalculation.Engine.Tests
             _mockTaxableType = new Mock<ITaxableType>(MockBehavior.Strict);
             _mockTaxSpecification = new Mock<ISpecification<Product>>(MockBehavior.Strict);
             _mockTaxSpecification.As<ITaxableType>();
-            _mockCountryDefinitionService = new Mock<ICountryDefinitionService>(MockBehavior.Strict);
+            _mockCountryDefinitionService = new Mock<ICountryDefinitionDataAccess>(MockBehavior.Strict);
             _mockSpecifications = new Mock<IEnumerable<ISpecification<Product>>>(MockBehavior.Strict);
             _mockSpecifications.Setup(c => c.GetEnumerator()).Returns(new List<ISpecification<Product>> { _mockTaxSpecification.Object }.Select(x => x).GetEnumerator());
 

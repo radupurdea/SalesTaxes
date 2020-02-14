@@ -5,8 +5,6 @@ namespace TEK.Infrastructure.Interfaces
 {
     public interface ICartService
     {
-        List<OrderProduct> Cart { get; }
-
         void AddToCart(Product selectedProduct);
         Receipt PreviewCart();
         Receipt Checkout();

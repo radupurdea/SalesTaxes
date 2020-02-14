@@ -11,11 +11,11 @@ namespace TEK.TaxCalculation.Engine
 {
     public class BasicTaxSpecification : ISpecification<Product>, ITaxableType
     {
-        readonly ICountryDefinitionService _countryDefinitionService;
+        readonly ICountryDefinitionDataAccess _countryDefinitionService;
 
         public TaxType TaxType { get; }
 
-        public BasicTaxSpecification(ICountryDefinitionService countryDefinitionService)
+        public BasicTaxSpecification(ICountryDefinitionDataAccess countryDefinitionService)
         {
             _countryDefinitionService = countryDefinitionService;
             TaxType = TaxType.BasicSalesTax;

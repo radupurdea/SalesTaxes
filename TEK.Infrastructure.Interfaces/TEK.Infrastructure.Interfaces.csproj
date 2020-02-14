@@ -50,6 +50,7 @@
     <Compile Include="DataContract\TaxBand.cs" />
     <Compile Include="Enum\ProductType.cs" />
     <Compile Include="Enum\TaxType.cs" />
+    <Compile Include="ICartItemDataAccess.cs" />
     <Compile Include="ICartService.cs" />
     <Compile Include="ICountryDefinitionService.cs" />
     <Compile Include="ISpecification.cs" />

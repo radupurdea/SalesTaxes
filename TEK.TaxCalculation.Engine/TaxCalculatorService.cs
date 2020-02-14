@@ -8,10 +8,10 @@ namespace TEK.TaxCalculation.Engine
 {
     public class TaxCalculatorService : ITaxCalculatorService
     {
-        readonly ICountryDefinitionService _countryDefinitionService;
+        readonly ICountryDefinitionDataAccess _countryDefinitionService;
         readonly IEnumerable<ISpecification<Product>> _taxSpecifications;
 
-        public TaxCalculatorService(ICountryDefinitionService countryDefinitionService, IEnumerable<ISpecification<Product>> taxSpecifications)
+        public TaxCalculatorService(ICountryDefinitionDataAccess countryDefinitionService, IEnumerable<ISpecification<Product>> taxSpecifications)
         {
             _countryDefinitionService = countryDefinitionService;
             _taxSpecifications = taxSpecifications;
@@ -19,17 +19,17 @@ namespace TEK.TaxCalculation.Engine
 
         public void ApplyTax(OrderProduct orderProduct)
         {
+            Country storeCountry = _countryDefinitionService.GetCountry();
+
             foreach (var taxSpecification in _taxSpecifications)
             {
                 if (taxSpecification.IsSatisfied(orderProduct.Product))
-                    CalculateTax(orderProduct, taxSpecification as ITaxableType);
+                    CalculateTax(storeCountry, orderProduct, taxSpecification as ITaxableType);
             }
         }
 
-        private void CalculateTax(OrderProduct orderProduct, ITaxableType taxType)
+        private void CalculateTax(Country storeCountry, OrderProduct orderProduct, ITaxableType taxType)
         {
-            Country storeCountry = _countryDefinitionService.GetCountry();
-
             List<TaxBand> bands = storeCountry.TaxBands
                                               .Where(x => x.TaxType == taxType.TaxType && x.ProductType == orderProduct.Product.ProductType)
                                               .ToList();

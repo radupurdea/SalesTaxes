@@ -19,8 +19,8 @@ namespace TEK.Store.Console
 
             var container = builder.Build();
 
-            IStoreDefinitionService storeDefinitionService = container.Resolve<IStoreDefinitionService>();
-            ICountryDefinitionService countryDefinitionService = container.Resolve<ICountryDefinitionService>();
+            IStoreDefinitionDataAccess storeDefinitionService = container.Resolve<IStoreDefinitionDataAccess>();
+            ICountryDefinitionDataAccess countryDefinitionService = container.Resolve<ICountryDefinitionDataAccess>();
             ICartService cartService = container.Resolve<ICartService>();
 
             Country storeCountry = countryDefinitionService.GetCountry();

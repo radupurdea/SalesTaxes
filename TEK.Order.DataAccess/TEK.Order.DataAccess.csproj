@@ -57,10 +57,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CountryDefinitionService.cs" />
+    <Compile Include="CartItemDataAccess.cs" />
+    <Compile Include="CountryDefinitionDataAccess.cs" />
     <Compile Include="ModuleResolution.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StoreDefinitionService.cs" />
+    <Compile Include="StoreDefinitionDataAccess.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TEK.Infrastructure.Interfaces\TEK.Infrastructure.Interfaces.csproj">

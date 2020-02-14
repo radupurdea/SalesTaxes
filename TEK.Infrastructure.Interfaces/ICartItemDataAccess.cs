@@ -7,8 +7,10 @@ using TEK.Infrastructure.Interfaces.DataContract;
 
 namespace TEK.Infrastructure.Interfaces
 {
-    public interface ICountryDefinitionDataAccess
+    public interface ICartItemDataAccess
     {
-        Country GetCountry();
+        List<OrderProduct> GetCart();
+
+        void SaveCart(List<OrderProduct> cartItems);
     }
 }

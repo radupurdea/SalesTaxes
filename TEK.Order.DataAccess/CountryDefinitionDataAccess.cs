@@ -1,18 +1,15 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Collections.Generic;
 using TEK.Infrastructure.Interfaces;
 using TEK.Infrastructure.Interfaces.DataContract;
-using System.Collections.Generic;
 using TEK.Infrastructure.Interfaces.Enum;
 
-namespace TEK.Order.DataAccess.Tests
+namespace TEK.Order.DataAccess
 {
-    [TestClass]
-    public class CountryDefinitionServiceTest
+    public class CountryDefinitionDataAccess : ICountryDefinitionDataAccess
     {
-        [TestMethod]
-        public void GetCountry_DefaultStore_ShouldReturnCanada()
+        public Country GetCountry()
         {
-            Country expectedCountry = new Country()
+            Country canada = new Country()
             {
                 Name = "Canada",
                 Currency = new Currency()
@@ -30,19 +27,7 @@ namespace TEK.Order.DataAccess.Tests
                 }
             };
 
-            ICountryDefinitionService countryDefinitionService = new CountryDefinitionService();
-
-            Country actualCountry = countryDefinitionService.GetCountry();
-
-            Assert.IsNotNull(actualCountry);
-            Assert.AreEqual(expectedCountry.Name, actualCountry.Name);
-            Assert.IsNotNull(actualCountry.Currency);
-            Assert.AreEqual(expectedCountry.Currency.Symbol, actualCountry.Currency.Symbol);
-            Assert.AreEqual(expectedCountry.Currency.Name, actualCountry.Currency.Name);
-            Assert.IsNotNull(actualCountry.TaxBands);
-            Assert.AreEqual(8, actualCountry.TaxBands.Capacity);
-            Assert.AreEqual(5, actualCountry.TaxBands.Count);
-            Assert.IsNotNull(countryDefinitionService);
+            return canada;
         }
     }
 }

@@ -3,7 +3,7 @@ using TEK.Infrastructure.Interfaces.DataContract;
 
 namespace TEK.Infrastructure.Interfaces
 {
-    public interface IStoreDefinitionService
+    public interface IStoreDefinitionDataAccess
     {
         List<Product> GetStoreProducts();
     }

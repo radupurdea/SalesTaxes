@@ -6,12 +6,12 @@ using TEK.Infrastructure.Interfaces;
 namespace TEK.Order.DataAccess.Tests
 {
     [TestClass]
-    public class StoreDefinitionServiceTest
+    public class StoreDefinitionDataAccessTest
     {
         [TestMethod]
         public void GetStoreProducts_DefaultStore_ShouldReturnNineProducts()
         {
-            IStoreDefinitionService storeDefinitionService = new StoreDefinitionService();
+            IStoreDefinitionDataAccess storeDefinitionService = new StoreDefinitionDataAccess();
 
             List<Product> storeProducts = storeDefinitionService.GetStoreProducts();
 

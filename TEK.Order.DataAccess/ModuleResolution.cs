@@ -7,8 +7,9 @@ namespace TEK.Order.DataAccess
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<CountryDefinitionService>().As<ICountryDefinitionService>().InstancePerLifetimeScope(); 
-            builder.RegisterType<StoreDefinitionService>().As<IStoreDefinitionService>().InstancePerLifetimeScope(); 
+            builder.RegisterType<CountryDefinitionDataAccess>().As<ICountryDefinitionDataAccess>().InstancePerLifetimeScope(); 
+            builder.RegisterType<StoreDefinitionDataAccess>().As<IStoreDefinitionDataAccess>().InstancePerLifetimeScope(); 
+            builder.RegisterType<CartItemDataAccess>().As<ICartItemDataAccess>().InstancePerLifetimeScope();
         }
     }
 }

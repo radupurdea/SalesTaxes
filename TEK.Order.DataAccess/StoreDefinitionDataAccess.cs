@@ -5,7 +5,7 @@ using TEK.Infrastructure.Interfaces.Enum;
 
 namespace TEK.Order.DataAccess
 {
-    public class StoreDefinitionService : IStoreDefinitionService
+    public class StoreDefinitionDataAccess : IStoreDefinitionDataAccess
     {
         public List<Product> GetStoreProducts()
         {
